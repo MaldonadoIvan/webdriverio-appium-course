@@ -1,8 +1,9 @@
-import path from 'path';
-import 'dotenv/config';
 // Required for corporate proxy SSL interception
 // DO NOT use in production environments
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
+import path from 'path';
+import 'dotenv/config';
 import { config } from './wdio.shared.conf.js';
 
 //
