@@ -1,5 +1,5 @@
 import path from 'path';
-require('dotenv').config()
+import 'dotenv/config';
 // Required for corporate proxy SSL interception
 // DO NOT use in production environments
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
