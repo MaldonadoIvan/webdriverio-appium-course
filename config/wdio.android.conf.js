@@ -1,47 +1,44 @@
-const path = require('path');
-const {config} = require('./wdio.shared.conf');
+import path from 'path';
+import { config as sharedConfig } from './wdio.shared.conf.js';
 
+const config = {
+  ...sharedConfig,
 
-// ====================
-// Runner Configuration
-// ====================
-//
-config.port = 4723;
-config.runner = 'local',
-config.hostname = '127.0.0.1',
-config.path = '/',
+  port: 4723,
+  runner: 'local',
+  hostname: '127.0.0.1',
+  path: '/',
 
 //
 // ============
 // Specs
 // ============
-config.specs = [
-    './test/specs/android/add-note-screen*.js'
-];
+  specs: [
+    '../test/specs/android/add-note.spec.js'
+  ],
 
+  capabilities: [
+    {
+      platformName: 'Android',
+      'appium:deviceName': 'Android GoogleAPI Emulator',
+      // 'appium:platformVersion': '15.0',
+      'appium:automationName': 'UiAutomator2',
+      'appium:app': path.join(process.cwd(), 'app', 'android', 'ColorNote+Notepad.apk'),
+      'appium:autoGrantPermissions': true
+    }
+  ],
 
-//
-// ============
-// Capabilities
-// ============
-config.capabilities = [
-  {
-      // capabilities for local Appium web tests on an Android Emulator
-        platformName: 'Android',
-        'appium:deviceName': 'Android GoogleAPI Emulator',
-        //'appium:platformVersion': '15.0', Se puede dejar desactivado, para que no exija explicitamente esta version
-        'appium:automationName': 'UiAutomator2',
-        'appium:app': path.join(process.cwd(), 'app', 'ColorNote+Notepad.apk'),
-        'appium:autoGrantPermissions': true
-  }
-]
+  services: [[
+    'appium',
+    {
+      args: {
+        address: 'localhost',
+        port: 4723,
+        relaxedSecurity: true
+      },
+      logPath: './'
+    }
+  ]]
+};
 
-//
-// Test runner services
-// Services take over a specific job you don't want to take care of. They enhance
-// your test setup with almost no effort. Unlike plugins, they don't add new
-// commands. Instead, they hook themselves up into the test process.
-config.services = ['appium'];
-
-
-exports.config = config;
+export { config };

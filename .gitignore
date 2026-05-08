@@ -122,3 +122,9 @@ dist
 Thumbs.db
 .vscode-test
 .tern-port
+
+####################################
+# Allure
+####################################
+allure-report/
+allure-results/
